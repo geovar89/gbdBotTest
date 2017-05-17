@@ -13,7 +13,7 @@ public class BasicForm
     [Prompt("Please select your language {||}")]
     public LanguageOptions Language { get; set; }
 
-	[Prompt("Please select your language {||}")]
+	[Prompt("What words do you want to search {&}?")]
     public string Words { get; set; }
 	
     public static IForm<BasicForm> BuildForm()
