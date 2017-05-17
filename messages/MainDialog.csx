@@ -44,14 +44,14 @@ public class MainDialog : IDialog<BasicForm>
 				   { "words","πωλήσεις" }
 				};
 
-				var content = new FormUrlEncodedContent(values);
-				var response = await client.PostAsync("http://wiki.softone.gr/main.ashx", content);
-				var responseString = await response.Content.ReadAsStringAsync();
+				//var content = new FormUrlEncodedContent(values);
+				//var response = await client.PostAsync("http://wiki.softone.gr/main.ashx", content);
+				//var responseString = await response.Content.ReadAsStringAsync();
             
 				//responseString = responseString.Replace("&","&amp");
 				//responseString = responseString.Replace("<","&lt");
 				//responseString = responseString.Replace(">","&lg");
-				await context.PostAsync(form.Language+' '+responseString);
+				await context.PostAsync(form);
             }
             else
             {
