@@ -1,7 +1,6 @@
 using System;
 using Microsoft.Bot.Builder.FormFlow;
 
-public enum CarOptions { Convertible = 1, SUV, EV };
 public enum LanguageOptions {Greek = 1, English};
 
 // For more information about this template visit http://aka.ms/azurebots-csharp-form
@@ -12,8 +11,11 @@ public class BasicForm
     public string Name { get; set; }
 
     [Prompt("Please select your language {||}")]
-    public LanguageOptions  { get; set; }
+    public LanguageOptions Language { get; set; }
 
+	[Prompt("Please select your language {||}")]
+    public string Words { get; set; }
+	
     public static IForm<BasicForm> BuildForm()
     {
         // Builds an IForm<T> based on BasicForm
