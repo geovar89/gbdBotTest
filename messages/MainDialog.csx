@@ -10,6 +10,7 @@ using Microsoft.Bot.Connector;
 [Serializable]
 public class MainDialog : IDialog<BasicForm>
 {
+	private static readonly HttpClient client = new HttpClient();
     public MainDialog()
     {
     }
