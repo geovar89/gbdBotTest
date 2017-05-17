@@ -51,7 +51,7 @@ public class MainDialog : IDialog<BasicForm>
 				//responseString = responseString.Replace("&","&amp");
 				//responseString = responseString.Replace("<","&lt");
 				//responseString = responseString.Replace(">","&lg");
-				await context.PostAsync(form.getName());
+				await context.PostAsync(form.Language.ToString());
             }
             else
             {

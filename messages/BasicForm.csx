@@ -12,7 +12,7 @@ public class BasicForm
     public string Name { get; set; }
 
     [Prompt("Please select your language {||}")]
-    public LanguageOptions Language { get; set; }
+    public LanguageOptions  { get; set; }
 
     public static IForm<BasicForm> BuildForm()
     {
