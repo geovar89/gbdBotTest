@@ -17,7 +17,7 @@ public class BasicForm
 	[Prompt("What words do you want to search?")]
     public string Words { get; set; }
 	
-	[Prompt("How many results do you want to see?")]
+	[Prompt("How many results do you want to see{||}?")]
     public ResultOptions Results { get; set; }
 	
     public static IForm<BasicForm> BuildForm()
