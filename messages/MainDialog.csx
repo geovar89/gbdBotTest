@@ -33,7 +33,25 @@ public class MainDialog : IDialog<BasicForm>
             var form = await result;
             if (form != null)
             {
-                await context.PostAsync("Thanks for completing the form! Just type anything to restart it.");
+			
+                //await context.PostAsync("Thanks for completing the form! Just type anything to restart it.");
+				var values = new Dictionary<string, string>
+				{
+				   { "op", "search" },
+				   { "ver", "v01" },
+				   { "lang", "el" },
+				   { "words","πωλήσεις" }
+				};
+
+				var content = new FormUrlEncodedContent(values);
+				var response = await client.PostAsync("http://wiki.softone.gr/main.ashx", content);
+				var responseString = await response.Content.ReadAsStringAsync();
+            
+				//responseString = responseString.Replace("&","&amp");
+				//responseString = responseString.Replace("<","&lt");
+				//responseString = responseString.Replace(">","&lg");
+				await context.PostAsync(form.Language+' '+responseString);
+				context.Wait(MessageReceivedAsync);
             }
             else
             {
