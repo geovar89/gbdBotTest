@@ -45,13 +45,11 @@ public class MainDialog : IDialog<BasicForm>
 					lang = "en";
 				}
 				words = form.Words;
-				if(words.IndexOf() > 0){
-					string source = words;
-					string[] stringSeparators = new string[] {","};
-					string[] result;
-					result = source.Split(stringSeparators, StringSplitOptions.None);
+				if(words.IndexOf(",") > 0){
+					string[] values = words.Split(",");
+					/*result = source.Split(stringSeparators, StringSplitOptions.None);
 					foreach (var splitWord in result)
-						words = words + ' ' + form.Language.ToString()+ ' '+ splitWord ;
+						words = words + ' ' + form.Operation.ToString()+ ' '+ splitWord ;*/
 				}
 				var values = new Dictionary<string, string>
 				{
