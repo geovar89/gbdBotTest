@@ -3,6 +3,7 @@ using Microsoft.Bot.Builder.FormFlow;
 
 public enum LanguageOptions {Greek = 1, English};
 public enum ResultOptions {All = 1, Five, Ten};
+public enum OperationOptions {AND = 1, OR};
 
 // For more information about this template visit http://aka.ms/azurebots-csharp-form
 [Serializable]
@@ -14,8 +15,11 @@ public class BasicForm
     [Prompt("Please select your language {||}")]
     public LanguageOptions Language { get; set; }
 
-	[Prompt("What words do you want to search?")]
+	[Prompt("What words do you want to search?Split different words with comma.")]
     public string Words { get; set; }
+	
+	[Prompt("Do you want results with all the words included or at least one{||}?")]
+    public OperationOptions Operation { get; set; }
 	
 	[Prompt("How many results do you want to see{||}?")]
     public ResultOptions Results { get; set; }
