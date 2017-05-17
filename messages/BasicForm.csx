@@ -2,7 +2,7 @@ using System;
 using Microsoft.Bot.Builder.FormFlow;
 
 public enum LanguageOptions {Greek = 1, English};
-public enum ResultOptions {5 = 1, 10, all};
+public enum ResultOptions {All = 1, Five, Ten};
 
 // For more information about this template visit http://aka.ms/azurebots-csharp-form
 [Serializable]
