@@ -46,7 +46,7 @@ public class MainDialog : IDialog<BasicForm>
 				}
 				words = form.Words;
 				if(words.IndexOf(",") > 0){
-					string[] values = words.Split(",");
+					string[] values = words.Split(new string[] { "," }, StringSplitOptions.None);
 					/*result = source.Split(stringSeparators, StringSplitOptions.None);
 					foreach (var splitWord in result)
 						words = words + ' ' + form.Operation.ToString()+ ' '+ splitWord ;*/
