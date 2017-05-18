@@ -65,16 +65,11 @@ public class MainDialog : IDialog<BasicForm>
 				   { "lang", lang },
 				   { "words",words }
 				};
-                var data = "{'info':'total results 46, total time 45 ms','results' : [{'title':'<a><strong>Μπάρα εργασίας</strong></a>','description' : '<span>Κατά την επιλογή από το Menu της εφαρμογής οποιουδήποτε Object πχ. <span style='font-weight:bold;'>πελάτες</span>, είδη, <span style='font-weight:bold;'>πωλήσεις</span> κλπ η μπάρα εργασίας της εφαρμογής είναι κοινή και τυποποιημένη. Οι εργασίες και οι δυνατότητες που παρέχονται μέσω της μπάρας εργασιών αναλύονται παρακάτω :             Ευρετήριο (χειρισμοί, επιλογή και σχεδίαση)         Συνήθεις εγγραφές         Προβολή (χειρισμοί, επιλογή και σχεδίαση)        Νέα εγγραφή (& save photo)         Copy from buffer  --Αντιγραφή από τελευταία         Καταχώρηση         Ακύρωση</span>'},{'title'		: '<a><strong>Task bar</strong></a>','description' : '<span>Μία μπάρα εργασίας, που θα τη βρείτε σε όλη την Soft1 εφαρμογή, είναι η Task bar. Αυτή η Soft1 μπάρα εργασίας είναι κοινή και τυποποιημένη για όλα τα object της εφαρμογής πχ. <span style='font-weight:bold;'>Πελάτες</span>, Είδη Αποθήκης, <span style='font-weight:bold;'>Πωλήσεις</span> κλπ. Παρακάτω θα δείτε και τις περιγραφές των σχετικών κουμπιών.    Αναλυτικά κάθε επιλογή  Λίστα: Eκτέλεση της λίστας βάσει οθόνης φίλτρων.  Φίλτρα: Οθόνη φίλτρων επιλεγμένης λίστας  Ομαδοποίηση δεδομένων ευρετηρίων που υποστηρίζει την οριζόντια ή κάθετη ομαδοποίηση.  Συνήθεις εγγραφές: Δυνατότητα</span>'}]}";
-				//var content = new FormUrlEncodedContent(valuesObj);
-				//var response = await client.PostAsync("http://wiki.softone.gr/main.ashx", content);
-				//var responseString = await response.Content.ReadAsStringAsync();
-				var responseString = "";
-				var results = data.results;
-				for(var i = 0; i results.Length; i++){
-					responseString = responseString + results[i].title + '</br>';
-				}
-				
+                /*var data = "{'info':'total results 46, total time 45 ms','results' : [{'title':'<a><strong>Μπάρα εργασίας</strong></a>','description' : '<span>Κατά την επιλογή από το Menu της εφαρμογής οποιουδήποτε Object πχ. <span style='font-weight:bold;'>πελάτες</span>, είδη, <span style='font-weight:bold;'>πωλήσεις</span> κλπ η μπάρα εργασίας της εφαρμογής είναι κοινή και τυποποιημένη. Οι εργασίες και οι δυνατότητες που παρέχονται μέσω της μπάρας εργασιών αναλύονται παρακάτω :             Ευρετήριο (χειρισμοί, επιλογή και σχεδίαση)         Συνήθεις εγγραφές         Προβολή (χειρισμοί, επιλογή και σχεδίαση)        Νέα εγγραφή (& save photo)         Copy from buffer  --Αντιγραφή από τελευταία         Καταχώρηση         Ακύρωση</span>'},{'title'		: '<a><strong>Task bar</strong></a>','description' : '<span>Μία μπάρα εργασίας, που θα τη βρείτε σε όλη την Soft1 εφαρμογή, είναι η Task bar. Αυτή η Soft1 μπάρα εργασίας είναι κοινή και τυποποιημένη για όλα τα object της εφαρμογής πχ. <span style='font-weight:bold;'>Πελάτες</span>, Είδη Αποθήκης, <span style='font-weight:bold;'>Πωλήσεις</span> κλπ. Παρακάτω θα δείτε και τις περιγραφές των σχετικών κουμπιών.    Αναλυτικά κάθε επιλογή  Λίστα: Eκτέλεση της λίστας βάσει οθόνης φίλτρων.  Φίλτρα: Οθόνη φίλτρων επιλεγμένης λίστας  Ομαδοποίηση δεδομένων ευρετηρίων που υποστηρίζει την οριζόντια ή κάθετη ομαδοποίηση.  Συνήθεις εγγραφές: Δυνατότητα</span>'}]}";*/
+				var content = new FormUrlEncodedContent(valuesObj);
+				var response = await client.PostAsync("http://wiki.softone.gr/main.ashx", content);
+				var responseString = await response.Content.ReadAsStringAsync();
+			
 				await context.PostAsync(responseString);
             }
             else
