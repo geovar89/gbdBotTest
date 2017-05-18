@@ -34,6 +34,7 @@ public class MainDialog : IDialog<BasicForm>
             var form = await result;
 			var lang = "";
 			var words = "";
+			var fixedWords = "";
             if (form != null)
             {
 			
@@ -47,26 +48,32 @@ public class MainDialog : IDialog<BasicForm>
 				words = form.Words;
 				if(words.IndexOf(",") > 0){
 					string[] values = words.Split(new string[] { "," }, StringSplitOptions.None);
-					/*result = source.Split(stringSeparators, StringSplitOptions.None);
-					foreach (var splitWord in result)
-						words = words + ' ' + form.Operation.ToString()+ ' '+ splitWord ;*/
+					foreach (var splitWord in values){
+					    if (String.IsNullOrEmpty(fixedWords)){
+							fixedWords = splitWord ;
+					    } 
+					    else{
+    						fixedWords = fixedWords + ' ' + form.Operation.ToString()+ ' '+ splitWord ;
+					    }
+				    }
+					words = fixedWords;
 				}
-				var values = new Dictionary<string, string>
+				var valuesObj = new Dictionary<string, string>
 				{
 				   { "op", "search" },
 				   { "ver", "v01" },
 				   { "lang", lang },
 				   { "words",words }
 				};
-
-				var content = new FormUrlEncodedContent(values);
+                
+				var content = new FormUrlEncodedContent(valuesObj);
 				var response = await client.PostAsync("http://wiki.softone.gr/main.ashx", content);
 				var responseString = await response.Content.ReadAsStringAsync();
             
 				//responseString = responseString.Replace("&","&amp");
 				//responseString = responseString.Replace("<","&lt");
 				//responseString = responseString.Replace(">","&lg");
-				await context.PostAsync(responseString);
+				await context.PostAsync(words);
             }
             else
             {
