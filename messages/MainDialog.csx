@@ -89,8 +89,8 @@ public class MainDialog : IDialog<BasicForm>
 
     public String createResults(JObject data)
     {
-        var htmlStart = "< !DOCTYPE html >< html >< body >",
-            htmlEnd = "</ body ></ html >",
+        var htmlStart = "<!DOCTYPE html ><html ><body>",
+            htmlEnd = "</body></html>",
             body = "",
             results = data["results"],
             count = data["totalcount"].ToString(),
