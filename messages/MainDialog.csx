@@ -89,6 +89,19 @@ public class MainDialog : IDialog<BasicForm>
 
     public String createResults(JObject data)
     {
-        return data["time"].ToString();
+        var htmlStart = "< !DOCTYPE html >< html >< body >",
+            htmlEnd = "</ body ></ html >",
+            body = "",
+            results = data["results"],
+            count = data["totalcount"].ToString(),
+            time = data["time"].ToString(),
+            finalHtml = "";
+
+        for(var i =0; i < results.Length; i++)
+        {
+            body = body + results[i]["url"].ToString() + "</br>";
+        }
+        finalHtml = htmlStart + body + htmlEnd;
+        return finalHtml;
     }
 }
