@@ -40,7 +40,7 @@ public class MainDialog : IDialog<BasicForm>
             {
 
                 //await context.PostAsync("Thanks for completing the form! Just type anything to restart it.");
-                /*if(form.Language.ToString() == "Greek"){
+                if(form.Language.ToString() == "Greek"){
 					lang = "el";
 				}
 				else{
@@ -68,11 +68,11 @@ public class MainDialog : IDialog<BasicForm>
 				};
                 var content = new FormUrlEncodedContent(valuesObj);
 				var response = await client.PostAsync("http://wiki.softone.gr/main.ashx", content);
-				var responseString = await response.Content.ReadAsStringAsync();*/
-                String responseString = "{'totalcount':'1','time':'123ms','results':[{'url':'wiki.softone.gr/arthro1','title':'titlos arthrou 1','description':'keimeno arthrou 1 pou periexei tis lekseis pou zitise o xristis'}]}";
+				var responseString = await response.Content.ReadAsStringAsync();
+                /*String responseString = "{'totalcount':'2','time':'123ms','results':[{'url':'wiki.softone.gr/arthro1','title':'titlos arthrou 1','description':'keimeno arthrou 1 pou periexei tis lekseis pou zitise o xristis'},{'url':'wiki.softone.gr/arthro1','title':'titlos arthrou 1','description':'keimeno arthrou 1 pou periexei tis lekseis pou zitise o xristis'}]}";
                 JObject json = JObject.Parse(responseString);
-                var count = createResults(json);
-                await context.PostAsync(count);
+                var count = createResults(json);*/
+                await context.PostAsync(responseString);
             }
             else
             {
@@ -89,8 +89,6 @@ public class MainDialog : IDialog<BasicForm>
 
     public String createResults(JObject data)
     {
-        String htmlStart = "<!DOCTYPE html><html><body>";
-        String htmlEnd = "</body></html>";
         String body = "";
         var results = data["results"];
         String count = data["totalcount"].ToString();
@@ -101,9 +99,9 @@ public class MainDialog : IDialog<BasicForm>
 
         for (var i = 0; i < myInt; i++)
         {
-            body = body + "<a href="+results[i]["url"].ToString()+">"+ results[i]["url"].ToString()+"</a>" + "</br>";
+            body = body + "<a href='"+results[i]["url"].ToString()+"'>"+ results[i]["url"].ToString()+"</a>" + "</br>";
         }
-        finalHtml = htmlStart + body + htmlEnd;
+        finalHtml = body ;
         return finalHtml;
         //return finalHtml;
     }
