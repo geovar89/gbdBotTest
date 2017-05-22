@@ -69,7 +69,7 @@ public class MainDialog : IDialog<BasicForm>
                 var content = new FormUrlEncodedContent(valuesObj);
 				var response = await client.PostAsync("http://wiki.softone.gr/main.ashx", content);
 				var responseString = await response.Content.ReadAsStringAsync();*/
-                String responseString = "{'totalcount':'45','time':'123ms','results':[{'url':'wiki.softone.gr/arthro1','title':'titlos arthrou 1','description':'keimeno arthrou 1 pou periexei tis lekseis pou zitise o xristis'}]}";
+                String responseString = "{'totalcount':'1','time':'123ms','results':[{'url':'wiki.softone.gr/arthro1','title':'titlos arthrou 1','description':'keimeno arthrou 1 pou periexei tis lekseis pou zitise o xristis'}]}";
                 JObject json = JObject.Parse(responseString);
                 var count = createResults(json);
                 await context.PostAsync(count);
@@ -92,18 +92,19 @@ public class MainDialog : IDialog<BasicForm>
         String htmlStart = "<!DOCTYPE html><html><body>";
         String htmlEnd = "</body></html>";
         String body = "";
-        Array results = data["results"];
+        var results = data["results"];
         String count = data["totalcount"].ToString();
+        int myInt = System.Convert.ToInt32(count);
         String time = data["time"].ToString();
         String finalHtml = "";
 
 
-        for (int i = 0; i < results.GetLength(); i++)
+        for (var i = 0; i < myInt; i++)
         {
-            //body = body + results[i]["url"].ToString() + "</br>";
+            body = body + results[i]["url"].ToString() + "</br>";
         }
-        //finalHtml = htmlStart + body + htmlEnd;
-
+        finalHtml = htmlStart + body + htmlEnd;
         return finalHtml;
+        //return finalHtml;
     }
 }
