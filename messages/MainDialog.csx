@@ -2,6 +2,7 @@
 
 using System;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Connector;
@@ -10,7 +11,7 @@ using Microsoft.Bot.Connector;
 [Serializable]
 public class MainDialog : IDialog<BasicForm>
 {
-	private static readonly HttpClient client = new HttpClient();
+    private static readonly HttpClient client = new HttpClient();
     public MainDialog()
     {
     }
@@ -32,9 +33,9 @@ public class MainDialog : IDialog<BasicForm>
         try
         {
             var form = await result;
-			var lang = "";
-			var words = "";
-			var fixedWords = "";
+            var lang = "";
+            var words = "";
+            var fixedWords = "";
             if (form != null)
             {
 
@@ -70,7 +71,7 @@ public class MainDialog : IDialog<BasicForm>
 				var responseString = await response.Content.ReadAsStringAsync();*/
                 String responseString = "{'totalcount':'45','time':'123ms','results':[{'url':'wiki.softone.gr/arthro1','title':'titlos arthrou 1','description':'keimeno arthrou 1 pou periexei tis lekseis pou zitise o xristis'}]}";
                 JObject json = JObject.Parse(responseString);
-                var count = json["totalcount"];
+                var count = createResults(json);
                 await context.PostAsync(count);
             }
             else
@@ -84,5 +85,10 @@ public class MainDialog : IDialog<BasicForm>
         }
 
         context.Wait(MessageReceivedAsync);
+    }
+
+    public String createResults(JObject data)
+    {
+        return data["time"].ToString();
     }
 }
