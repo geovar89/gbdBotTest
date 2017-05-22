@@ -101,7 +101,7 @@ public class MainDialog : IDialog<BasicForm>
 
         for (var i = 0; i < myInt; i++)
         {
-            body = body + results[i]["url"].ToString() + "</br>";
+            body = body + "<a href="+results[i]["url"].ToString()+">"+ results[i]["url"].ToString()+"</a>" + "</br>";
         }
         finalHtml = htmlStart + body + htmlEnd;
         return finalHtml;
