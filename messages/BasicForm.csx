@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Bot.Builder.FormFlow;
+using Microsoft.Bot.Builder.FormFlow.Advanced;
 
 public enum LanguageOptions {Greek = 1, English};
 public enum ResultOptions {All = 1, Five, Ten};
@@ -19,15 +20,25 @@ public class BasicForm
     public string Words { get; set; }
 	
 	[Prompt("Do you want results with all the words included or at least one{||}?")]
+    [Optional]
     public OperationOptions Operation { get; set; }
 	
 	[Prompt("How many results do you want to see{||}?")]
+    [Optional]
     public ResultOptions Results { get; set; }
 	
     public static IForm<BasicForm> BuildForm()
     {
         // Builds an IForm<T> based on BasicForm
-        return new FormBuilder<BasicForm>().Build();
+        return new FormBuilder<BasicForm>()
+            .Field(nameof(Name))
+            .Field(nameof(Language))
+            .Field(nameof(Words))
+            .Field(new FieldReflector<BasicForm>(nameof(Operation))
+                .SetActive((state) => state.Words.IndexOf(",") > 0)
+            )
+            .Field(nameof(Results))
+            .Build();
     }
 
     public static IFormDialog<BasicForm> BuildFormDialog(FormOptions options = FormOptions.PromptInStart)
